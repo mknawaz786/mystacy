@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYStacy — Features</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1714;--bg2:#1f1c18;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);--border:rgba(201,168,76,0.13);--border2:rgba(201,168,76,0.24);--gold:#c9a84c;--gold-dim:rgba(201,168,76,0.55);--gold-faint:rgba(201,168,76,0.08);--gold-glow:rgba(201,168,76,0.15);--t1:rgba(255,255,255,0.92);--t2:rgba(255,255,255,0.52);--t3:rgba(255,255,255,0.26);--radius:12px;--radius-lg:18px;--green:#4ade80}
+html{scroll-behavior:smooth}
+body{font-family:'Figtree',-apple-system,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(26,23,20,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:20px;font-weight:300;text-decoration:none;color:var(--t1)}
+.nav-logo em{font-style:italic;font-weight:600;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--t3);text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{padding:9px 20px;border-radius:8px;background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.nav-cta:hover{background:rgba(201,168,76,0.14)}
+
+/* HERO */
+.page-hero{padding-top:140px;padding-bottom:80px;padding-left:48px;padding-right:48px;max-width:1100px;margin:0 auto;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-100px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);pointer-events:none}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--t3);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--border2)}
+.page-title{font-size:clamp(44px,7vw,80px);font-weight:300;color:var(--t1);line-height:1.0;letter-spacing:-0.02em;margin-bottom:24px}
+.page-title .g{color:var(--gold)}
+.page-title .gi{color:var(--gold);font-style:italic;font-weight:600}
+.page-lead{font-size:18px;font-weight:300;color:var(--t2);max-width:560px;line-height:1.8}
+
+/* FEATURE DEEP DIVES */
+.feat-section{padding:80px 48px;max-width:1100px;margin:0 auto;border-bottom:1px solid rgba(255,255,255,0.05)}
+.feat-section:last-of-type{border-bottom:none}
+.feat-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.feat-layout.reverse{direction:rtl}
+.feat-layout.reverse > *{direction:ltr}
+.feat-num{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:300;color:rgba(201,168,76,0.08);line-height:1;margin-bottom:-16px;letter-spacing:-0.04em}
+.feat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px}
+.feat-title{font-size:clamp(28px,4vw,40px);font-weight:300;color:var(--t1);margin-bottom:16px;line-height:1.2}
+.feat-title .g{color:var(--gold)}
+.feat-body{font-size:16px;font-weight:300;color:var(--t2);line-height:1.85;margin-bottom:28px}
+.feat-points{display:flex;flex-direction:column;gap:12px}
+.feat-point{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--t2);line-height:1.6}
+.feat-point::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px;opacity:0.7}
+
+/* VISUAL MOCK */
+.feat-visual{border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);padding:28px;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;gap:12px}
+.feat-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-glow),transparent)}
+.vis-header{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.vis-dot{width:8px;height:8px;border-radius:50%}
+.vis-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:0.08em}
+.vis-tag{padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;border:1px solid var(--border2);color:var(--gold);background:var(--gold-faint);margin-left:auto}
+.vis-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
+.vis-row-label{font-size:13px;color:var(--t2);flex:1}
+.vis-row-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)}
+.vis-row-badge{padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:9px}
+.badge-green{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:var(--green)}
+.badge-gold{background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold)}
+.badge-dim{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:var(--t3)}
+.vis-bubble{padding:12px 16px;border-radius:10px;font-size:13px;font-weight:300;line-height:1.6}
+.bubble-stacy{background:var(--gold-faint);border:1px solid var(--border2);color:var(--t1);border-radius:10px 10px 10px 2px}
+.bubble-user{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:var(--t2);border-radius:10px 10px 2px 10px;align-self:flex-end}
+.bubble-name{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--t3);margin-bottom:5px;letter-spacing:0.1em}
+.sms-row{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)}
+.sms-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.contact-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px}
+.contact-name{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:4px}
+.contact-role{font-size:12px;color:var(--t3);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+.contact-facts{display:flex;flex-direction:column;gap:6px}
+.contact-fact{font-size:12px;color:var(--t2);display:flex;gap:8px;align-items:flex-start}
+.contact-fact::before{content:'·';color:var(--gold);flex-shrink:0}
+.encrypt-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.12)}
+.encrypt-label{font-size:13px;color:var(--t2);flex:1}
+.encrypt-status{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);display:flex;align-items:center;gap:5px}
+
+/* CAPABILITY TABLE */
+.cap-table{width:100%;border-collapse:collapse;margin-top:48px}
+.cap-table th{text-align:left;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border)}
+.cap-table td{padding:14px 16px;font-size:14px;font-weight:300;color:var(--t2);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top}
+.cap-table td:first-child{color:var(--t1);font-weight:400}
+.cap-table tr:hover td{background:rgba(255,255,255,0.02)}
+.check{color:var(--green);font-size:14px}
+.cross{color:rgba(255,255,255,0.2);font-size:14px}
+
+/* CTA BAND */
+.cta-band{background:var(--gold-faint);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 48px;text-align:center}
+.cta-band-title{font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--t1);margin-bottom:16px}
+.cta-band-title em{font-style:italic;color:var(--gold);font-weight:600}
+.cta-band-sub{font-size:16px;color:var(--t2);margin-bottom:32px}
+.cta-input-row{display:flex;gap:8px;max-width:440px;margin:0 auto}
+.email-input{flex:1;padding:13px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--t1);font-family:'Figtree',sans-serif;font-size:15px;font-weight:300;outline:none;transition:border-color 0.2s}
+.email-input::placeholder{color:var(--t3)}
+.email-input:focus{border-color:var(--border2)}
+.submit-btn{padding:13px 22px;border-radius:10px;background:var(--gold);border:none;color:#1a1714;font-family:'Figtree',sans-serif;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s}
+.submit-btn:hover{background:#d4b459}
+.cta-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-top:12px;letter-spacing:0.05em}
+
+footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.2)}
+.footer-brand{font-size:16px;font-weight:300}
+.footer-brand em{font-style:italic;font-weight:600;color:var(--gold)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)}
+
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  .page-hero,.feat-section{padding:48px 24px}
+  .feat-layout{grid-template-columns:1fr;gap:40px;direction:ltr}
+  .feat-layout.reverse{direction:ltr}
+  .cta-band{padding:48px 24px}
+  .cta-input-row{flex-direction:column}
+  footer{padding:24px;flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><em>MY</em>Stacy</a>
+  <div class="nav-links">
+    <a href="mystacy-features.html" class="active">Features</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+  </div>
+  <a href="index.html#waitlist" class="nav-cta">Request Access</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Intelligence, deeply explained</div>
+  <div class="page-title">Not features.<br><span class="gi">A second mind.</span></div>
+  <div class="page-lead">Every capability in Mystacy exists for one reason: to free your mind from operational overhead so it can do what it does best. Here's how she actually works.</div>
+</div>
+
+<!-- STACY -->
+<div class="feat-section">
+  <div class="feat-layout">
+    <div>
+      <div class="feat-num">01</div>
+      <div class="feat-label">Core Intelligence</div>
+      <div class="feat-title">Stacy — your <span class="g">named AI</span></div>
+      <div class="feat-body">Stacy is not a chatbot. She is a persistent, named AI assistant with memory, personality, and a growing model of who you are. Every conversation deepens her understanding. She doesn't reset. She doesn't forget. She gets better.</div>
+      <div class="feat-points">
+        <div class="feat-point">Persistent memory across every session — she knows your history</div>
+        <div class="feat-point">Loaded with your context: tasks, contacts, projects, and preferences</div>
+        <div class="feat-point">Responds in under 2 seconds — faster than opening an app</div>
+        <div class="feat-point">Available via app, web, and SMS — wherever you are</div>
+        <div class="feat-point">Personality that adapts to your communication style over time</div>
+      </div>
+    </div>
+    <div class="feat-visual">
+      <div class="vis-header">
+        <div class="vis-dot" style="background:var(--gold)"></div>
+        <div class="vis-title">Stacy · AI Assistant</div>
+        <div class="vis-tag">Active</div>
+      </div>
+      <div>
+        <div class="bubble-name">YOU · 9:04am</div>
+        <div class="vis-bubble bubble-user">What's on my plate today that I keep putting off?</div>
+      </div>
+      <div>
+        <div class="bubble-name">STACY · 9:04am</div>
+        <div class="vis-bubble bubble-stacy">Three things you've deferred more than twice: the Drip Society lease renewal (due Friday), the follow-up with Dr. Chen from last Tuesday, and the quarterly review deck. Based on your calendar, your best window is 2–4pm today. Want me to block it?</div>
+      </div>
+      <div class="vis-row">
+        <div class="vis-row-label">Context loaded</div>
+        <div class="vis-row-badge badge-green">Full memory active</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT INTELLIGENCE -->
+<div class="feat-section">
+  <div class="feat-layout reverse">
+    <div>
+      <div class="feat-num">02</div>
+      <div class="feat-label">Relationship Layer</div>
+      <div class="feat-title">Contact Intelligence.<br><span class="g">She knows everyone.</span></div>
+      <div class="feat-body">Every email, message, and interaction you have gets passively processed into rich relationship profiles. No CRM setup. No manual tagging. Stacy builds a picture of every person in your world — what they care about, what you've discussed, and what needs follow-up.</div>
+      <div class="feat-points">
+        <div class="feat-point">Passively reads inbound communications — no manual input required</div>
+        <div class="feat-point">Zettelkasten-style knowledge graph of every contact</div>
+        <div class="feat-point">Confidence scoring on facts — she knows what she knows</div>
+        <div class="feat-point">Surfaces relationship context before important meetings</div>
+        <div class="feat-point">Flags follow-ups you've missed without being asked</div>
+      </div>
+    </div>
+    <div class="feat-visual">
+      <div class="vis-header">
+        <div class="vis-dot" style="background:#bf5af2"></div>
+        <div class="vis-title">Contact Intelligence</div>
+        <div class="vis-tag">Passive</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-name">Dr. Sarah Chen</div>
+        <div class="contact-role">Cardiologist · Memorial Hospital</div>
+        <div class="contact-facts">
+          <div class="contact-fact">Met at DoctoPreneur conference, March 2026. Interested in IV wellness</div>
+          <div class="contact-fact">Last contact: Tuesday 11am email — unreplied</div>
+          <div class="contact-fact">She mentioned opening a second practice in Boca Raton</div>
+          <div class="contact-fact">Has referred 2 patients to Drip Society this year</div>
+        </div>
+      </div>
+      <div class="vis-row">
+        <div class="vis-row-label">Follow-up overdue</div>
+        <div class="vis-row-badge badge-gold">4 days · High priority</div>
+      </div>
+      <div class="vis-row">
+        <div class="vis-row-label">Relationship strength</div>
+        <div class="vis-row-badge badge-green">Strong · 94% confidence</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SMS AGENT -->
+<div class="feat-section">
+  <div class="feat-layout">
+    <div>
+      <div class="feat-num">03</div>
+      <div class="feat-label">Mobile Intelligence</div>
+      <div class="feat-title">Stacy via SMS.<br><span class="g">No app required.</span></div>
+      <div class="feat-body">Your second brain travels with you. Text Stacy from any phone — she responds, captures, organizes, and acts. Seeing a patient and have a thought? Text it. In a meeting and need to follow up on something? Text it. She handles it.</div>
+      <div class="feat-points">
+        <div class="feat-point">Single shared number — text from any device, any carrier</div>
+        <div class="feat-point">Full context from your account — she knows who you are</div>
+        <div class="feat-point">Captures tasks, ideas, and reminders via natural language</div>
+        <div class="feat-point">Responds to questions with full intelligence</div>
+        <div class="feat-point">MMS support — send images, voice notes, documents</div>
+      </div>
+    </div>
+    <div class="feat-visual">
+      <div class="vis-header">
+        <div class="vis-dot" style="background:var(--green)"></div>
+        <div class="vis-title">SMS · Stacy Agent</div>
+        <div class="sms-row" style="margin-left:auto"><div class="sms-dot"></div><span>Connected</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="vis-bubble bubble-user">remind me to follow up with dr chen tomorrow at 8am</div>
+        <div class="vis-bubble bubble-stacy">Done. Reminder set for tomorrow 8am — follow up with Dr. Sarah Chen re: Boca Raton practice. I'll also surface her contact notes when it fires.</div>
+        <div class="vis-bubble bubble-user">what did i capture this week?</div>
+        <div class="vis-bubble bubble-stacy">14 captures this week: 6 tasks (3 done), 4 ideas (2 filed to Projects), 3 follow-ups (1 overdue — Dr. Chen), 1 expense note. Want a full summary?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENCRYPTION -->
+<div class="feat-section">
+  <div class="feat-layout reverse">
+    <div>
+      <div class="feat-num">04</div>
+      <div class="feat-label">Privacy Architecture</div>
+      <div class="feat-title">Encrypted<br><span class="g">by design.</span></div>
+      <div class="feat-body">Your thoughts are the most sensitive data you have. Mystacy treats them accordingly. Client-side AES-256-GCM encryption means your data is encrypted in your browser before it ever leaves your device. The server — and the AI — only ever sees ciphertext.</div>
+      <div class="feat-points">
+        <div class="feat-point">Client-side AES-256-GCM — encrypted before it leaves your browser</div>
+        <div class="feat-point">Supabase stores only ciphertext — no plaintext in the database</div>
+        <div class="feat-point">AI context is decrypted browser-side before API calls</div>
+        <div class="feat-point">Zero knowledge architecture — we cannot read your data</div>
+        <div class="feat-point">HIPAA-considered design for medical professionals</div>
+      </div>
+    </div>
+    <div class="feat-visual">
+      <div class="vis-header">
+        <div class="vis-dot" style="background:var(--green)"></div>
+        <div class="vis-title">Encryption Status</div>
+        <div class="vis-tag">AES-256-GCM</div>
+      </div>
+      <div class="encrypt-row">
+        <div class="encrypt-label">Client-side encryption</div>
+        <div class="encrypt-status">● Active</div>
+      </div>
+      <div class="encrypt-row">
+        <div class="encrypt-label">Database storage</div>
+        <div class="encrypt-status">● Ciphertext only</div>
+      </div>
+      <div class="encrypt-row">
+        <div class="encrypt-label">AI context decryption</div>
+        <div class="encrypt-status">● Browser-side only</div>
+      </div>
+      <div class="encrypt-row">
+        <div class="encrypt-label">Data sold to third parties</div>
+        <div class="encrypt-status" style="color:rgba(255,80,80,0.7)">✕ Never</div>
+      </div>
+      <div class="vis-row" style="margin-top:4px">
+        <div class="vis-row-label" style="font-size:12px;color:var(--t3);font-family:'JetBrains Mono',monospace">Your key · Your data · Your mind</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div style="padding:72px 48px;max-width:1100px;margin:0 auto">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px">
+    <span>05 — vs. everything else</span>
+    <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+  <div style="font-size:clamp(28px,4vw,42px);font-weight:300;color:var(--t1);margin-bottom:14px">Why not just use<br><span style="color:var(--gold)">ChatGPT?</span></div>
+  <div style="font-size:16px;font-weight:300;color:var(--t2);max-width:580px;line-height:1.85;margin-bottom:40px">Because ChatGPT doesn't know you. It doesn't remember you. It doesn't work in the background. It doesn't know your contacts or your calendar. It's a brilliant tool. Stacy is a relationship.</div>
+  <table class="cap-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th><em style="font-style:italic;color:var(--gold)">MY</em>Stacy</th>
+        <th>ChatGPT / Claude</th>
+        <th>Notion AI</th>
+        <th>Task Apps</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Persistent memory of you</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Named, personal AI identity</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Works via SMS</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Passive contact intelligence</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Client-side encryption</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Task + project management</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>AI gets smarter about you over time</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+      <tr><td>Invite-only access</td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-title">Ready for a <em>second brain?</em></div>
+  <div class="cta-band-sub">Join the waitlist. We'll reach out personally when your spot is ready.</div>
+  <div id="waitlist" style="padding:64px 48px;max-width:600px;margin:0 auto;text-align:center">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px">Join the waitlist</div>
+  <iframe
+    src="https://kash-os.vercel.app/waitlist"
+    width="100%"
+    height="620"
+    frameborder="0"
+    scrolling="no"
+    style="border:none;display:block;max-width:480px;margin:0 auto;border-radius:16px;"
+    title="MYStacy Waitlist">
+  </iframe>
+</div>
+</div>
+
+<footer>
+  <div class="footer-brand"><em>MY</em>Stacy™</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+  </div>
+  <div class="footer-legal">© 2026 MYStacy · All rights reserved</div>
+</footer>
+
+</body>
+</html>

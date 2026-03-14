@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYStacy — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1714;--bg2:#1f1c18;--surface:rgba(255,255,255,0.04);--border:rgba(201,168,76,0.13);--border2:rgba(201,168,76,0.24);--gold:#c9a84c;--gold-dim:rgba(201,168,76,0.55);--gold-faint:rgba(201,168,76,0.08);--t1:rgba(255,255,255,0.92);--t2:rgba(255,255,255,0.52);--t3:rgba(255,255,255,0.26);--radius:12px;--radius-lg:18px}
+html{scroll-behavior:smooth}
+body{font-family:'Figtree',-apple-system,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(26,23,20,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:20px;font-weight:300;text-decoration:none;color:var(--t1)}
+.nav-logo em{font-style:italic;font-weight:600;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--t3);text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{padding:9px 20px;border-radius:8px;background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.nav-cta:hover{background:rgba(201,168,76,0.14)}
+
+/* HERO */
+.page-hero{padding:140px 48px 80px;max-width:900px;margin:0 auto;position:relative}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 65%);pointer-events:none}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--t3);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--border2)}
+.page-title{font-size:clamp(44px,7vw,80px);font-weight:300;color:var(--t1);line-height:1.0;letter-spacing:-0.02em;margin-bottom:32px}
+.page-title .gi{color:var(--gold);font-style:italic;font-weight:600}
+.page-lead{font-size:20px;font-weight:300;color:var(--t2);line-height:1.85;max-width:680px}
+.page-lead em{color:var(--t1);font-style:normal}
+
+/* ORIGIN STORY */
+.story{padding:80px 48px;max-width:900px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05)}
+.story-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.story-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);position:sticky;top:120px}
+.story-body{display:flex;flex-direction:column;gap:28px}
+.story-p{font-size:17px;font-weight:300;color:var(--t2);line-height:1.9}
+.story-p em{color:var(--t1);font-style:italic}
+.story-p strong{color:var(--t1);font-weight:500}
+.pull-quote{border-left:2px solid var(--gold);padding:20px 28px;margin:8px 0;background:var(--gold-faint);border-radius:0 var(--radius) var(--radius) 0}
+.pull-quote p{font-size:22px;font-weight:300;color:var(--t1);line-height:1.55;font-style:italic}
+.pull-quote cite{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:0.1em;margin-top:12px;text-transform:uppercase;font-style:normal}
+
+/* VALUES */
+.values{padding:80px 48px;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.values-inner{max-width:1100px;margin:0 auto}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-title{font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--t1);margin-bottom:48px;line-height:1.2}
+.sec-title .g{color:var(--gold)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.value-cell{background:var(--bg);padding:36px 28px}
+.value-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:0.15em;margin-bottom:16px}
+.value-icon{font-size:28px;margin-bottom:16px;display:block}
+.value-title{font-size:19px;font-weight:500;color:var(--t1);margin-bottom:10px}
+.value-body{font-size:14px;font-weight:300;color:var(--t2);line-height:1.75}
+
+/* FOUNDER */
+.founder{padding:80px 48px;max-width:900px;margin:0 auto}
+.founder-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;position:relative;overflow:hidden}
+.founder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0.4}
+.founder-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--t3);margin-bottom:20px}
+.founder-name{font-size:32px;font-weight:300;color:var(--t1);margin-bottom:6px}
+.founder-name em{font-style:italic;color:var(--gold);font-weight:600}
+.founder-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:0.08em;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.founder-bio{font-size:16px;font-weight:300;color:var(--t2);line-height:1.85;max-width:600px;margin-bottom:24px}
+.founder-bio em{color:var(--t1);font-style:italic}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ftag{padding:5px 12px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:10px;border:1px solid var(--border2);color:var(--gold);background:var(--gold-faint);letter-spacing:0.05em}
+
+/* STACY ORIGIN */
+.stacy-origin{padding:80px 48px;background:rgba(0,0,0,0.2);border-top:1px solid var(--border)}
+.stacy-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.stacy-left{}
+.stacy-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.stacy-label::after{content:'';width:40px;height:1px;background:var(--border)}
+.stacy-title{font-size:36px;font-weight:300;color:var(--t1);margin-bottom:18px;line-height:1.15}
+.stacy-title em{font-style:italic;color:var(--gold)}
+.stacy-body{font-size:16px;font-weight:300;color:var(--t2);line-height:1.85}
+.stacy-right{display:flex;flex-direction:column;gap:16px}
+.stacy-fact{display:flex;gap:14px;align-items:flex-start;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.stacy-fact-bar{width:2px;border-radius:2px;background:var(--gold);flex-shrink:0;align-self:stretch;min-height:36px;opacity:0.5}
+.stacy-fact-body{font-size:14px;font-weight:300;color:var(--t2);line-height:1.65}
+.stacy-fact-body strong{color:var(--t1);font-weight:500}
+
+/* PHILOSOPHY */
+.philosophy{padding:80px 48px;max-width:900px;margin:0 auto}
+.phil-stack{display:flex;flex-direction:column;gap:0}
+.phil-item{padding:32px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:grid;grid-template-columns:120px 1fr;gap:40px;align-items:start}
+.phil-item:first-child{border-top:1px solid rgba(255,255,255,0.05)}
+.phil-num{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:300;color:rgba(201,168,76,0.12);line-height:1;padding-top:4px}
+.phil-content{}
+.phil-title{font-size:20px;font-weight:500;color:var(--t1);margin-bottom:10px}
+.phil-body{font-size:15px;font-weight:300;color:var(--t2);line-height:1.8}
+
+/* CTA */
+.about-cta{padding:80px 48px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+.about-cta-title{font-size:clamp(32px,5vw,56px);font-weight:300;color:var(--t1);margin-bottom:20px;line-height:1.1}
+.about-cta-title em{font-style:italic;color:var(--gold);font-weight:600}
+.about-cta-body{font-size:17px;color:var(--t2);max-width:520px;margin:0 auto 36px;line-height:1.8}
+.cta-row{display:flex;gap:8px;max-width:440px;margin:0 auto}
+.email-input{flex:1;padding:13px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--t1);font-family:'Figtree',sans-serif;font-size:15px;font-weight:300;outline:none;transition:border-color 0.2s}
+.email-input::placeholder{color:var(--t3)}
+.email-input:focus{border-color:var(--border2)}
+.submit-btn{padding:13px 22px;border-radius:10px;background:var(--gold);border:none;color:#1a1714;font-family:'Figtree',sans-serif;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s}
+.submit-btn:hover{background:#d4b459}
+.cta-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);margin-top:12px}
+
+footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.2)}
+.footer-brand{font-size:16px;font-weight:300}
+.footer-brand em{font-style:italic;font-weight:600;color:var(--gold)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)}
+
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  .page-hero,.story,.founder,.stacy-origin,.philosophy,.values,.about-cta{padding-left:24px;padding-right:24px}
+  .story-grid{grid-template-columns:1fr;gap:32px}
+  .story-label{position:static}
+  .values-grid{grid-template-columns:1fr}
+  .stacy-inner{grid-template-columns:1fr;gap:40px}
+  .phil-item{grid-template-columns:60px 1fr;gap:20px}
+  .cta-row{flex-direction:column}
+  footer{padding:24px;flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><em>MY</em>Stacy</a>
+  <div class="nav-links">
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-about.html" class="active">About</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+  </div>
+  <a href="index.html#waitlist" class="nav-cta">Request Access</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">The story behind the name</div>
+  <div class="page-title">Built for the mind<br>that <span class="gi">never stops.</span></div>
+  <div class="page-lead">Mystacy didn't start as a SaaS product. It started as a <em>personal survival tool</em> — built by a physician and entrepreneur who was drowning in the complexity of running multiple businesses simultaneously and couldn't find a single system that understood how he actually worked.</div>
+</div>
+
+<!-- ORIGIN STORY -->
+<div class="story">
+  <div class="story-grid">
+    <div class="story-label">The Origin</div>
+    <div class="story-body">
+      <div class="story-p">The problem wasn't the tasks. It wasn't the emails. It wasn't even the volume. The problem was <em>context-switching</em> — the invisible tax paid every time the mind moves between roles. Physician. Clinic owner. IV wellness founder. Husband. Friend. Advisor.</div>
+
+      <div class="pull-quote">
+        <p>"Every tool I tried was built for one role. I live in five simultaneously. None of them knew me well enough to be useful."</p>
+        <cite>Founder · Physician · Operator</cite>
+      </div>
+
+      <div class="story-p">So he built what he needed. A single system that could hold the full complexity of a high-output life — tasks, contacts, communications, ideas — and make it navigable. Not manageable. <em>Navigable.</em> There's a difference. Manageable implies keeping up. Navigable implies moving through.</div>
+
+      <div class="story-p">The AI assistant came first. Not as a feature — as a relationship. He named her <strong>Stacy.</strong> Not because the name meant anything technically, but because naming something changes how you relate to it. She wasn't a tool. She was a thinking partner.</div>
+
+      <div class="story-p">The system grew from there. Contact intelligence because he kept losing track of who people were and what they needed. SMS because he couldn't always be at a computer between patients. Encryption because the thoughts of a physician are protected by more than preference — they carry professional and ethical weight.</div>
+
+      <div class="story-p">The decision to open it to others came slowly. Not as a business plan, but as a realization: <em>every high-output person he knew had the same problem.</em> The fragmented stack. The information overload. The leverage lost to administrative noise. If it worked for him, it would work for them.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values">
+  <div class="values-inner">
+    <div class="sec-label">What we believe</div>
+    <div class="sec-title">The principles that<br><span class="g">everything else follows.</span></div>
+    <div class="values-grid">
+      <div class="value-cell">
+        <div class="value-num">001</div>
+        <div class="value-icon">🧠</div>
+        <div class="value-title">The mind deserves infrastructure</div>
+        <div class="value-body">Your brain is the most valuable asset you have. It deserves the same care and investment as any other high-performance system. Mystacy is cognitive infrastructure — not a task app.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">002</div>
+        <div class="value-icon">🔒</div>
+        <div class="value-title">Privacy is not a feature</div>
+        <div class="value-body">What you think is more sensitive than what you say publicly. We encrypt by default, store only ciphertext, and will never sell your data — not because it's a selling point, but because it's the only ethical position.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">003</div>
+        <div class="value-icon">⭐</div>
+        <div class="value-title">Exclusivity serves quality</div>
+        <div class="value-body">We grow slowly on purpose. Every new user gets personal attention. The waitlist isn't marketing — it's how we ensure Stacy is excellent for the people who use her before we open the door wider.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">004</div>
+        <div class="value-icon">🤝</div>
+        <div class="value-title">AI should feel like a relationship</div>
+        <div class="value-body">A chatbot is a tool. Stacy is a relationship. The distinction matters. Relationships have memory, personality, and stakes. They get better over time. They earn trust. That's what we're building.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">005</div>
+        <div class="value-icon">⚡</div>
+        <div class="value-title">Speed is respect</div>
+        <div class="value-body">The people using Mystacy don't have time to waste. Every interaction is designed to be faster than the alternative — under 2 seconds for capture, instant SMS response, no unnecessary clicks between thought and action.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">006</div>
+        <div class="value-icon">🌱</div>
+        <div class="value-title">Compounding intelligence</div>
+        <div class="value-body">Stacy on day one is good. Stacy after 90 days is something else. The model of you she builds compounds — every captured thought, every contact note, every pattern makes her more accurate, more anticipatory, more yours.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOUNDER -->
+<div class="founder">
+  <div class="sec-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px">
+    <span>The founder</span><span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+  <div class="founder-card">
+    <div class="founder-eyebrow">Built by someone who needed it first</div>
+    <div class="founder-name"><em>Kash</em></div>
+    <div class="founder-role">Psychiatrist · Clinic Owner · Founder of Drip Society · Builder of KASH OS → Mystacy</div>
+    <div class="founder-bio">A physician running a psychiatric clinic and a group of IV wellness lounges simultaneously — <em>Mystacy was not a business idea, it was a necessity.</em> Built first for himself, using the same tools he now offers: Next.js, Supabase, Claude API, Twilio, client-side encryption. The system you're looking at is the system he uses every day.</div>
+    <div class="founder-bio">He describes himself as a "vibe coder" — someone who builds by intent and intuition rather than line-by-line engineering. The result is a product that feels like it was made by someone who actually lives the problem, because it was.</div>
+    <div class="founder-tags">
+      <div class="ftag">Psychiatry</div>
+      <div class="ftag">Drip Society</div>
+      <div class="ftag">South Florida</div>
+      <div class="ftag">Physician Entrepreneur</div>
+      <div class="ftag">KASH OS</div>
+    </div>
+  </div>
+</div>
+
+<!-- STACY ORIGIN -->
+<div class="stacy-origin">
+  <div class="stacy-inner">
+    <div class="stacy-left">
+      <div class="stacy-label">Who is Stacy</div>
+      <div class="stacy-title">She was named<br>before she was<br><em>built.</em></div>
+      <div class="stacy-body">The name came first — an instinct that the AI assistant needed to feel like a person, not a product. That naming decision turned out to be the most important design choice in the entire system. It changed how conversations felt, how memory was structured, and ultimately how users relate to what Mystacy does.</div>
+    </div>
+    <div class="stacy-right">
+      <div class="stacy-fact">
+        <div class="stacy-fact-bar"></div>
+        <div class="stacy-fact-body"><strong>Stacy has a voice.</strong> Not a literal voice — a perspective. A consistent way of engaging that feels warm, direct, and intelligent without being clinical or robotic.</div>
+      </div>
+      <div class="stacy-fact">
+        <div class="stacy-fact-bar"></div>
+        <div class="stacy-fact-body"><strong>Stacy has memory.</strong> Every conversation, every capture, every contact note becomes part of how she understands you. She doesn't reset. She accumulates.</div>
+      </div>
+      <div class="stacy-fact">
+        <div class="stacy-fact-bar"></div>
+        <div class="stacy-fact-body"><strong>Stacy has a name you can say out loud.</strong> "Let me ask Stacy" sounds human. "Let me check my AI assistant" sounds like science fiction. The name makes the relationship real.</div>
+      </div>
+      <div class="stacy-fact">
+        <div class="stacy-fact-bar"></div>
+        <div class="stacy-fact-body"><strong>Stacy belongs to you.</strong> The MY in MYStacy is the whole point. She's not a shared product. She's yours — calibrated to your patterns, your language, your life.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy">
+  <div class="sec-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px">
+    <span>Philosophy</span><span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+  <div style="font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--t1);margin-bottom:48px;line-height:1.15">What Mystacy is<br><span style="color:var(--gold)">not</span> trying to be.</div>
+  <div class="phil-stack">
+    <div class="phil-item">
+      <div class="phil-num">01</div>
+      <div class="phil-content">
+        <div class="phil-title">Not the most powerful AI</div>
+        <div class="phil-body">There will always be a more powerful language model. That's not the competition. The competition is the chaos of your day — the context-switching, the dropped threads, the information that exists but can't be found when needed. Stacy wins not by being smarter than Claude or GPT-4, but by knowing you better than either of them ever could.</div>
+      </div>
+    </div>
+    <div class="phil-item">
+      <div class="phil-num">02</div>
+      <div class="phil-content">
+        <div class="phil-title">Not a platform for everyone</div>
+        <div class="phil-body">The phrase "not for everyone" is the most important thing on the website. Mass adoption would require compromises that would make Mystacy worse for the people it's best for. The physician founder who needs deep contact intelligence and encrypted thought capture doesn't need the same thing as a college student managing homework. We choose our user.</div>
+      </div>
+    </div>
+    <div class="phil-item">
+      <div class="phil-num">03</div>
+      <div class="phil-content">
+        <div class="phil-title">Not another subscription you forget about</div>
+        <div class="phil-body">Mystacy is priced to be felt. Not as a burden — as a commitment. The people who pay $199/month for a second brain use it because it earns its keep every single week. The price is a filter and a motivator. It ensures that the people using Stacy are the people she's built to serve.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="about-cta">
+  <div class="about-cta-title">If this resonates,<br>you're <em>exactly</em> who we built this for.</div>
+  <div class="about-cta-body">Join the waitlist. We'll reach out personally when your spot is ready. We don't rush this part.</div>
+  
+  <div class="cta-note">Invite-only · No card required · We respond personally</div>
+</div>
+
+<footer>
+  <div class="footer-brand"><em>MY</em>Stacy™</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+  </div>
+  <div class="footer-legal">© 2026 MYStacy · All rights reserved</div>
+</footer>
+
+<div id="waitlist" style="padding:64px 48px;max-width:600px;margin:0 auto;text-align:center">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px">Join the waitlist</div>
+  <iframe
+    src="https://kash-os.vercel.app/waitlist"
+    width="100%"
+    height="620"
+    frameborder="0"
+    scrolling="no"
+    style="border:none;display:block;max-width:480px;margin:0 auto;border-radius:16px;"
+    title="MYStacy Waitlist">
+  </iframe>
+</div>
+<script>
+function scrollToWaitlist(e) {
+  if (e) e.preventDefault();
+  var el = document.getElementById('waitlist');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+</script>
+</body>
+</html>

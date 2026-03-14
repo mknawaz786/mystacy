@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYStacy — The second brain. Not for everyone.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1714;
+  --bg2:#1f1c18;
+  --bg3:#242018;
+  --surface:rgba(255,255,255,0.04);
+  --surface2:rgba(255,255,255,0.07);
+  --border:rgba(201,168,76,0.13);
+  --border2:rgba(201,168,76,0.24);
+  --gold:#c9a84c;
+  --gold-dim:rgba(201,168,76,0.55);
+  --gold-faint:rgba(201,168,76,0.08);
+  --gold-glow:rgba(201,168,76,0.15);
+  --t1:rgba(255,255,255,0.92);
+  --t2:rgba(255,255,255,0.52);
+  --t3:rgba(255,255,255,0.26);
+  --radius:12px;
+  --radius-lg:18px;
+  --green:#4ade80;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Figtree',-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--t1);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(26,23,20,0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+.nav-logo{font-size:20px;font-weight:300;letter-spacing:-0.01em}
+.nav-logo em{font-style:italic;font-weight:600;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:0.08em;color:var(--t3);text-decoration:none;
+  text-transform:uppercase;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  padding:9px 20px;border-radius:8px;
+  background:var(--gold-faint);border:1px solid var(--border2);
+  color:var(--gold);font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;transition:all 0.2s;
+}
+.nav-cta:hover{background:rgba(201,168,76,0.14);border-color:var(--gold)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-glow-1{
+  position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-glow-2{
+  position:absolute;bottom:-200px;left:20%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--t3);
+  margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:14px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:32px;height:1px;background:var(--border2)}
+
+.hero-name{
+  font-size:clamp(72px,12vw,140px);
+  font-weight:300;line-height:0.95;
+  letter-spacing:-0.03em;margin-bottom:28px;
+}
+.hero-name .my{
+  font-style:italic;font-weight:600;color:var(--gold);
+  display:inline;
+}
+.hero-name .stacy{color:var(--t1);display:inline}
+
+.hero-tagline{
+  font-size:clamp(18px,3vw,26px);font-weight:300;
+  color:var(--t2);max-width:560px;margin:0 auto 48px;
+  line-height:1.5;letter-spacing:0.01em;
+}
+.hero-tagline em{color:var(--t1);font-style:normal}
+
+/* ── WAITLIST FORM ── */
+.waitlist-box{
+  width:100%;max-width:480px;margin:0 auto;
+  display:flex;flex-direction:column;gap:12px;
+}
+.input-row{display:flex;gap:8px}
+
+.submit-btn{
+  padding:14px 24px;border-radius:10px;
+  background:var(--gold);border:none;
+  color:#1a1714;font-family:'Figtree',sans-serif;
+  font-size:15px;font-weight:600;cursor:pointer;
+  white-space:nowrap;transition:all 0.2s;
+}
+.submit-btn:hover{background:#d4b459;transform:translateY(-1px)}
+.submit-btn:active{transform:translateY(0)}
+
+.waitlist-note{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--t3);letter-spacing:0.05em;text-align:center;
+}
+
+/* ── SUCCESS STATE ── */
+.success-state{
+  display:none;text-align:center;padding:28px;
+  background:var(--gold-faint);border:1px solid var(--border2);
+  border-radius:var(--radius-lg);
+}
+.success-state.show{display:block}
+.success-icon{font-size:32px;margin-bottom:12px}
+.success-title{font-size:22px;font-weight:400;color:var(--t1);margin-bottom:8px}
+.success-title em{font-style:italic;color:var(--gold)}
+.success-body{font-size:14px;color:var(--t2);margin-bottom:20px;line-height:1.7}
+.referral-box{
+  background:rgba(0,0,0,0.25);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.referral-link{
+  flex:1;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--gold);text-align:left;word-break:break-all;
+}
+.copy-btn{
+  padding:7px 14px;background:var(--gold-faint);border:1px solid var(--border2);
+  border-radius:7px;color:var(--gold);font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.08em;cursor:pointer;white-space:nowrap;
+  transition:all 0.2s;
+}
+.copy-btn:hover{background:rgba(201,168,76,0.15)}
+.referral-nudge{font-size:12px;color:var(--t3);font-family:'JetBrains Mono',monospace;letter-spacing:0.04em}
+.queue-pos{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.2);border-radius:20px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:12px;
+}
+
+/* ── SOCIAL PROOF ── */
+.proof-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:32px;margin-top:56px;flex-wrap:wrap;
+}
+.proof-item{
+  display:flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--t3);letter-spacing:0.08em;text-transform:uppercase;
+}
+.proof-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.5}
+
+/* ── DIVIDER ── */
+.section-divider{
+  display:flex;align-items:center;gap:20px;
+  padding:0 48px;margin:20px 0;
+}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.05)}
+.section-divider span{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--t3);
+  white-space:nowrap;
+}
+
+/* ── SECTIONS ── */
+section{padding:100px 48px;max-width:1100px;margin:0 auto}
+
+.sec-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);
+  margin-bottom:20px;display:flex;align-items:center;gap:14px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-title{font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--t1);margin-bottom:18px;line-height:1.15}
+.sec-title .g{color:var(--gold)}
+.sec-body{font-size:17px;font-weight:300;color:var(--t2);max-width:580px;line-height:1.8}
+
+/* ── FEATURES ── */
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;margin-top:48px;
+}
+.feat{
+  background:var(--bg);padding:36px 30px;
+  position:relative;overflow:hidden;transition:background 0.2s;
+}
+.feat:hover{background:var(--bg2)}
+.feat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-glow),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.feat:hover::before{opacity:1}
+.feat-num{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--t3);letter-spacing:0.15em;margin-bottom:20px;
+}
+.feat-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--gold-faint);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;font-size:18px;
+}
+.feat-title{font-size:19px;font-weight:500;color:var(--t1);margin-bottom:10px}
+.feat-body{font-size:14px;font-weight:300;color:var(--t2);line-height:1.75}
+
+/* ── WHO IT'S FOR ── */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
+.who-card{
+  padding:36px;border-radius:var(--radius-lg);
+  background:var(--surface);border:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.who-card.featured{
+  background:var(--gold-faint);border-color:var(--border2);
+}
+.who-role{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);
+  margin-bottom:16px;
+}
+.who-quote{font-size:18px;font-weight:300;color:var(--t1);line-height:1.6;font-style:italic;margin-bottom:20px}
+.who-name{font-size:13px;color:var(--t3);font-family:'JetBrains Mono',monospace}
+.who-accent{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:0.4;
+}
+
+/* ── HOW IT WORKS ── */
+.how-steps{display:flex;flex-direction:column;gap:1px;margin-top:48px}
+.how-step{
+  display:grid;grid-template-columns:80px 1fr;
+  background:var(--border);
+}
+.how-step:first-child .how-n{border-radius:var(--radius) 0 0 0}
+.how-step:first-child .how-b{border-radius:0 var(--radius) 0 0}
+.how-step:last-child  .how-n{border-radius:0 0 0 var(--radius)}
+.how-step:last-child  .how-b{border-radius:0 0 var(--radius) 0}
+.how-n{
+  background:var(--gold-faint);border-right:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:18px;
+  font-weight:500;color:var(--gold-dim);
+}
+.how-b{
+  background:var(--bg);padding:28px 32px;
+}
+.how-title{font-size:17px;font-weight:500;color:var(--t1);margin-bottom:6px}
+.how-desc{font-size:14px;color:var(--t2);font-family:'JetBrains Mono',monospace;line-height:1.65}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.price-card{
+  border-radius:var(--radius-lg);
+  background:var(--surface);border:1px solid var(--border);
+  padding:36px 30px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.price-card.featured{
+  background:var(--gold-faint);border-color:var(--border2);
+  transform:scale(1.02);
+}
+.featured-badge{
+  position:absolute;top:16px;right:16px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--border2);
+  padding:4px 10px;border-radius:6px;background:var(--gold-faint);
+}
+.price-tier{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);margin-bottom:16px;
+}
+.price-amount{
+  font-size:48px;font-weight:300;color:var(--t1);line-height:1;margin-bottom:4px;
+}
+.price-amount .g{color:var(--gold)}
+.price-period{font-size:13px;color:var(--t3);font-family:'JetBrains Mono',monospace;margin-bottom:24px}
+.price-desc{font-size:14px;color:var(--t2);margin-bottom:28px;line-height:1.7;font-weight:300}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
+.price-features li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--t2);line-height:1.5;
+}
+.price-features li::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;margin-top:7px;opacity:0.7;
+}
+.price-btn{
+  margin-top:28px;width:100%;padding:13px;border-radius:10px;
+  font-family:'Figtree',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;transition:all 0.2s;border:1px solid var(--border2);
+  background:transparent;color:var(--gold);
+}
+.price-btn:hover{background:var(--gold-faint)}
+.price-btn.primary{background:var(--gold);color:#1a1714;border-color:var(--gold)}
+.price-btn.primary:hover{background:#d4b459}
+
+/* ── MYSTERY SECTION ── */
+.mystery-section{
+  padding:100px 48px;text-align:center;
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.mystery-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.mystery-letters{
+  display:flex;gap:6px;align-items:center;justify-content:center;
+  margin-bottom:40px;
+}
+.ml{
+  width:52px;height:64px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Figtree',sans-serif;font-size:28px;font-weight:600;
+  transition:all 0.4s;cursor:default;
+}
+.ml.lit{
+  background:rgba(201,168,76,0.12);border:1px solid var(--border2);
+  color:var(--gold);
+}
+.ml.dim{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  color:var(--t3);
+}
+.ml.dim:hover{background:rgba(201,168,76,0.05);border-color:var(--border);color:var(--t2)}
+.mystery-title{font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--t1);margin-bottom:16px;line-height:1.2}
+.mystery-title em{font-style:italic;color:var(--gold)}
+.mystery-body{font-size:17px;color:var(--t2);max-width:540px;margin:0 auto;line-height:1.8;font-weight:300}
+
+/* ── FINAL CTA ── */
+.final-cta{
+  padding:120px 48px;text-align:center;
+  max-width:680px;margin:0 auto;
+}
+.final-title{font-size:clamp(36px,6vw,64px);font-weight:300;color:var(--t1);margin-bottom:20px;line-height:1.1}
+.final-title .g{color:var(--gold);font-style:italic;font-weight:600}
+.final-body{font-size:17px;color:var(--t2);margin-bottom:48px;line-height:1.8;font-weight:300}
+
+/* ── FOOTER ── */
+footer{
+  padding:32px 48px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,0.2);
+}
+.footer-brand{font-size:16px;font-weight:300}
+.footer-brand em{font-style:italic;font-weight:600;color:var(--gold)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);
+  text-decoration:none;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseGold{0%,100%{opacity:0.5}50%{opacity:1}}
+
+.iframe-section{
+  width:100%;max-width:500px;margin:0 auto;
+}
+
+.cta-scroll-btn{
+  display:inline-block;
+  padding:14px 40px;border-radius:10px;
+  background:var(--gold);
+  color:#1a1714;font-family:'Figtree',sans-serif;
+  font-size:16px;font-weight:600;
+  text-decoration:none;cursor:pointer;
+  transition:all 0.2s;letter-spacing:0.01em;
+  border:none;
+}
+.cta-scroll-btn:hover{background:#d4b459;transform:translateY(-1px)}
+@keyframes pulseGold{0%,100%{opacity:0.5}50%{opacity:1}}
+.fade-up{opacity:0;animation:fadeUp 0.7s ease forwards}
+.fade-up-1{animation-delay:0.1s}
+.fade-up-2{animation-delay:0.25s}
+.fade-up-3{animation-delay:0.4s}
+.fade-up-4{animation-delay:0.55s}
+.fade-up-5{animation-delay:0.7s}
+.pulse{animation:pulseGold 2.5s ease-in-out infinite}
+
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  section{padding:72px 24px}
+  .features-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card.featured{transform:none}
+  .who-grid{grid-template-columns:1fr}
+  .mystery-section{padding:72px 24px}
+  .final-cta{padding:80px 24px}
+  footer{padding:24px;flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+  .input-row{flex-direction:column}
+  .submit-btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><em>MY</em>Stacy</div>
+  <div class="nav-links">
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+  </div>
+  <a href="#waitlist" class="nav-cta" onclick="scrollToWaitlist(event)">Request Access</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-eyebrow fade-up fade-up-1">Personal AI · Second Brain · Not for everyone</div>
+
+  <div class="hero-name fade-up fade-up-2">
+    <span class="my">MY</span><span class="stacy">Stacy</span>
+  </div>
+
+  <div class="hero-tagline fade-up fade-up-3">
+    She's not for everyone.<br><em>She's for you.</em>
+  </div>
+
+  <div id="waitlist" class="iframe-section fade-up fade-up-4">
+  <iframe
+    src="https://kash-os.vercel.app/waitlist"
+    width="100%"
+    height="620"
+    frameborder="0"
+    scrolling="no"
+    style="border:none;display:block;max-width:480px;margin:0 auto;border-radius:16px;"
+    title="MYStacy Waitlist">
+  </iframe>
+</div>
+
+  <div class="proof-row fade-up fade-up-5">
+    <div class="proof-item"><div class="proof-dot"></div>AES-256-GCM encrypted</div>
+    <div class="proof-item"><div class="proof-dot"></div>No data sold. Ever.</div>
+    <div class="proof-item"><div class="proof-dot"></div>Works via SMS</div>
+  </div>
+</div>
+
+<div class="section-divider"><span>What Stacy does</span></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-label">01 — Intelligence</div>
+  <div class="sec-title">Not a feature.<br><span class="g">A relationship.</span></div>
+  <div class="sec-body">Stacy is a named, persistent AI with memory. She doesn't just respond — she knows. Every task, contact, conversation, and pattern you've ever shared becomes part of how she thinks about you.</div>
+
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-num">001</div>
+      <div class="feat-icon">🧠</div>
+      <div class="feat-title">Stacy — Your AI</div>
+      <div class="feat-body">A named, persistent AI assistant with memory and personality. Not a chatbot — a relationship. She captures thoughts in under 2 seconds and operates with full context of your life.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">002</div>
+      <div class="feat-icon">📡</div>
+      <div class="feat-title">Contact Intelligence</div>
+      <div class="feat-body">Passively reads every inbound communication and builds rich relationship profiles on every person you interact with. No manual input. It just knows who matters.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">003</div>
+      <div class="feat-icon">💬</div>
+      <div class="feat-title">SMS Agent</div>
+      <div class="feat-body">Text Stacy from anywhere. She responds, captures tasks, and acts — no app required. Your second brain travels with you in your pocket at all times.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">004</div>
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Quick Capture</div>
+      <div class="feat-body">Brain-dump anything in under 2 seconds. Voice, text, idea — captured before you lose it. Stacy organizes it, prioritizes it, and surfaces it when relevant.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">005</div>
+      <div class="feat-icon">🔒</div>
+      <div class="feat-title">Encrypted by Design</div>
+      <div class="feat-body">Client-side AES-256-GCM encryption. Your data never touches AI raw. Supabase stores only ciphertext. Your thoughts stay yours — always.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">006</div>
+      <div class="feat-icon">🎯</div>
+      <div class="feat-title">Tasks + Projects</div>
+      <div class="feat-body">A unified task system connected to AI, not siloed from it. Stacy knows your deadlines, your blockers, and what to prioritize — before you have to ask.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><span>Who it's built for</span></div>
+
+<!-- WHO IT'S FOR -->
+<section id="who">
+  <div class="sec-label">02 — The User</div>
+  <div class="sec-title">Built for minds that<br><span class="g">can't afford to slow down.</span></div>
+  <div class="sec-body">Mystacy is not for everyone. It's for the physician running a practice and a side business. The founder managing five priorities simultaneously. The operator who is drowning in information and losing leverage to noise.</div>
+
+  <div class="who-grid">
+    <div class="who-card featured">
+      <div class="who-role">The Physician</div>
+      <div class="who-quote">"I see 30 patients a day. I can't be managing software between charts. I need one thing that handles everything."</div>
+      <div class="who-name">Physician · Practice owner · Clinic founder</div>
+      <div class="who-accent"></div>
+    </div>
+    <div class="who-card">
+      <div class="who-role">The Founder</div>
+      <div class="who-quote">"I run three businesses simultaneously. My brain is at capacity. I need a second brain that actually works."</div>
+      <div class="who-name">Entrepreneur · Operator · Builder</div>
+      <div class="who-accent"></div>
+    </div>
+    <div class="who-card">
+      <div class="who-role">The Senior Operator</div>
+      <div class="who-quote">"I've tried every productivity tool. None of them know me. I need something that gets smarter over time."</div>
+      <div class="who-name">Executive · Attorney · Financial advisor</div>
+      <div class="who-accent"></div>
+    </div>
+    <div class="who-card">
+      <div class="who-role">Not for you if…</div>
+      <div class="who-quote">"You want a to-do list. You want another chatbot. You want something free. Stacy is none of those things."</div>
+      <div class="who-name">Mystacy is premium, intentional, and rare.</div>
+      <div class="who-accent"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"><span>How it works</span></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="sec-label">03 — The Experience</div>
+  <div class="sec-title">She works.<br><span class="g">You think.</span></div>
+
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-n">01</div>
+      <div class="how-b">
+        <div class="how-title">You get access — by invitation only</div>
+        <div class="how-desc">No public signup. You either get invited or you wait. Exclusivity is the first feature.</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">02</div>
+      <div class="how-b">
+        <div class="how-title">Stacy learns who you are</div>
+        <div class="how-desc">She reads your patterns, your contacts, your communications. Passively. No manual setup required.</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">03</div>
+      <div class="how-b">
+        <div class="how-title">You capture anything, anywhere</div>
+        <div class="how-desc">Text Stacy via SMS. Use the app. Voice memo. Under 2 seconds from thought to captured — wherever you are.</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">04</div>
+      <div class="how-b">
+        <div class="how-title">She handles what you shouldn't be doing</div>
+        <div class="how-desc">Task prioritization, contact intelligence, briefings, follow-ups. She runs the operating layer so you operate at the thinking layer.</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">05</div>
+      <div class="how-b">
+        <div class="how-title">She gets smarter every week</div>
+        <div class="how-desc">Every interaction deepens her model of you. After 90 days, she anticipates before you ask. That's the compounding advantage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MYSTERY SECTION -->
+<div class="mystery-section">
+  <div class="mystery-glow"></div>
+  <div class="mystery-letters">
+    <div class="ml lit">M</div>
+    <div class="ml lit">Y</div>
+    <div class="ml lit">S</div>
+    <div class="ml lit">T</div>
+    <div class="ml dim">A</div>
+    <div class="ml dim">C</div>
+    <div class="ml dim">Y</div>
+  </div>
+  <div class="mystery-title">The name contains a <em>secret.</em></div>
+  <div class="mystery-body">The first four letters spell MYSTERY. It's not accidental. The system knows things about you that you haven't told it directly. That's not surveillance — that's intelligence. The mystery is what makes it feel alive.</div>
+</div>
+
+<div class="section-divider"><span>Pricing</span></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="sec-label">04 — Investment</div>
+  <div class="sec-title">Premium pricing.<br><span class="g">Premium outcomes.</span></div>
+  <div class="sec-body">No freemium. No trial. The price is the first signal that this is not another productivity app. If you're the right person, it's the best money you'll spend.</div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Essential</div>
+      <div class="price-amount">$<span class="g">99</span></div>
+      <div class="price-period">per month · billed annually</div>
+      <div class="price-desc">For the professional who needs Stacy in their corner — personal use, one device, full intelligence.</div>
+      <ul class="price-features">
+        <li>Stacy AI assistant — full memory</li>
+        <li>Quick Capture — voice &amp; text</li>
+        <li>SMS Agent — text Stacy anywhere</li>
+        <li>Task &amp; Project management</li>
+        <li>Contact Intelligence Layer</li>
+        <li>AES-256-GCM encryption</li>
+      </ul>
+      <button class="price-btn" onclick="scrollToWaitlist()">Request Access</button>
+    </div>
+
+    <div class="price-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="price-tier">Professional</div>
+      <div class="price-amount">$<span class="g">199</span></div>
+      <div class="price-period">per month · billed annually</div>
+      <div class="price-desc">For the operator running multiple things simultaneously. Everything in Essential, plus deeper intelligence.</div>
+      <ul class="price-features">
+        <li>Everything in Essential</li>
+        <li>Multi-model AI Chat (Claude, GPT-4o)</li>
+        <li>Gmail + Calendar integration</li>
+        <li>Advanced contact intelligence</li>
+        <li>Priority SMS response time</li>
+        <li>Stacy personality customization</li>
+        <li>Weekly AI briefing digest</li>
+      </ul>
+      <button class="price-btn primary" onclick="scrollToWaitlist()">Request Access</button>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tier">Sovereign</div>
+      <div class="price-amount">$<span class="g">299</span></div>
+      <div class="price-period">per month · billed annually</div>
+      <div class="price-desc">For the founder or physician who needs a complete cognitive infrastructure. Nothing held back.</div>
+      <ul class="price-features">
+        <li>Everything in Professional</li>
+        <li>Dedicated onboarding session</li>
+        <li>Custom Stacy personality build</li>
+        <li>Priority support — 4hr response</li>
+        <li>Early access to new features</li>
+        <li>Quarterly strategy review call</li>
+        <li>White-glove data migration</li>
+      </ul>
+      <button class="price-btn" onclick="scrollToWaitlist()">Request Access</button>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="final-title">Do you have<br>a <span class="g">Stacy?</span></div>
+  <div class="final-body">The people who do don't talk about productivity tools. They just operate differently. Faster. Clearer. With more leverage than the people around them. Now you know why.</div>
+
+  <a href="#waitlist" onclick="scrollToWaitlist(event)" class="cta-scroll-btn">Request Access &darr;</a>
+  <div class="waitlist-note" style="margin-top:14px;font-family:JetBrains Mono,monospace;font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:0.05em">Invite-only &middot; No card required &middot; We respond personally</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><em>MY</em>Stacy™</div>
+  <div class="footer-links">
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-privacy.html">Privacy</a>
+    <a href="mailto:hello@mystacy.ai">Contact</a>
+  </div>
+  <div class="footer-legal">© 2026 MYStacy · All rights reserved</div>
+</footer>
+
+<script>
+function scrollToWaitlist(e) {
+  if (e) e.preventDefault();
+  var el = document.getElementById('waitlist');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.ml.dim').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      el.style.color = 'var(--gold)';
+      el.style.background = 'rgba(201,168,76,0.1)';
+      el.style.borderColor = 'var(--border2)';
+    });
+    el.addEventListener('mouseleave', function() {
+      el.style.color = '';
+      el.style.background = '';
+      el.style.borderColor = '';
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    if (nav) {
+      nav.style.borderBottomColor = window.scrollY > 60
+        ? 'rgba(201,168,76,0.22)'
+        : 'rgba(201,168,76,0.13)';
+    }
+  });
+});
+</script>
+</body>
+</html>

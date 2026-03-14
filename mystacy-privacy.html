@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYStacy — Privacy & Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1714;--bg2:#1f1c18;--surface:rgba(255,255,255,0.04);--border:rgba(201,168,76,0.13);--border2:rgba(201,168,76,0.24);--gold:#c9a84c;--gold-dim:rgba(201,168,76,0.55);--gold-faint:rgba(201,168,76,0.08);--t1:rgba(255,255,255,0.92);--t2:rgba(255,255,255,0.52);--t3:rgba(255,255,255,0.26);--radius:12px;--radius-lg:18px;--green:#4ade80}
+html{scroll-behavior:smooth}
+body{font-family:'Figtree',-apple-system,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(26,23,20,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:20px;font-weight:300;text-decoration:none;color:var(--t1)}
+.nav-logo em{font-style:italic;font-weight:600;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--t3);text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{padding:9px 20px;border-radius:8px;background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.nav-cta:hover{background:rgba(201,168,76,0.14)}
+
+.page-hero{padding:140px 48px 80px;max-width:900px;margin:0 auto;position:relative}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(74,222,128,0.05) 0%,transparent 65%);pointer-events:none}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--t3);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--border2)}
+.page-title{font-size:clamp(44px,7vw,80px);font-weight:300;color:var(--t1);line-height:1.0;letter-spacing:-0.02em;margin-bottom:24px}
+.page-title .g{color:var(--gold)}
+.page-title .gg{color:var(--green)}
+.page-lead{font-size:18px;font-weight:300;color:var(--t2);max-width:580px;line-height:1.85}
+
+/* STATUS STRIP */
+.status-strip{padding:0 48px;max-width:900px;margin:0 auto 64px}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.status-cell{background:var(--surface);padding:24px 20px;text-align:center}
+.status-icon{font-size:22px;margin-bottom:8px;display:block}
+.status-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.status-val{font-size:14px;font-weight:500;color:var(--green)}
+
+/* SECTIONS */
+.content-section{padding:64px 48px;max-width:900px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05)}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-title{font-size:clamp(24px,3.5vw,36px);font-weight:300;color:var(--t1);margin-bottom:20px;line-height:1.25}
+.sec-title .g{color:var(--gold)}
+.sec-title .gg{color:var(--green)}
+.body-text{font-size:16px;font-weight:300;color:var(--t2);line-height:1.9;margin-bottom:20px;max-width:700px}
+.body-text em{color:var(--t1);font-style:italic}
+.body-text strong{color:var(--t1);font-weight:500}
+.body-text a{color:var(--gold);text-decoration:none}
+
+/* ARCHITECTURE DIAGRAM */
+.arch-diagram{margin:32px 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.arch-header{padding:16px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.arch-dot{width:8px;height:8px;border-radius:50%}
+.arch-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:0.08em}
+.arch-body{padding:28px;display:flex;flex-direction:column;gap:12px}
+.arch-layer{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:var(--radius);border:1px solid}
+.arch-layer.user{background:rgba(10,132,255,0.06);border-color:rgba(10,132,255,0.2)}
+.arch-layer.encrypt{background:rgba(74,222,128,0.06);border-color:rgba(74,222,128,0.2)}
+.arch-layer.server{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.08)}
+.arch-layer.ai{background:var(--gold-faint);border-color:var(--border2)}
+.arch-layer-icon{font-size:20px;flex-shrink:0}
+.arch-layer-content{flex:1}
+.arch-layer-title{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:3px}
+.arch-layer-desc{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);line-height:1.5}
+.arch-layer-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 10px;border-radius:4px;white-space:nowrap}
+.badge-green{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:var(--green)}
+.badge-gold{background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold)}
+.badge-dim{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t3)}
+.arch-arrow{text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:0.1em}
+
+/* PRINCIPLES LIST */
+.principles{display:flex;flex-direction:column;gap:0;margin-top:28px}
+.principle{display:grid;grid-template-columns:48px 1fr;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.principle:last-child{border-bottom:none}
+.p-num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:300;color:rgba(201,168,76,0.15);line-height:1.2}
+.p-content{}
+.p-title{font-size:17px;font-weight:500;color:var(--t1);margin-bottom:8px}
+.p-body{font-size:15px;font-weight:300;color:var(--t2);line-height:1.8}
+
+/* WHAT WE COLLECT TABLE */
+.data-table{width:100%;border-collapse:collapse;margin-top:28px}
+.data-table th{text-align:left;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border)}
+.data-table td{padding:14px 16px;font-size:13px;font-weight:300;color:var(--t2);border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:top;line-height:1.6}
+.data-table td:first-child{color:var(--t1);font-weight:400;font-family:'JetBrains Mono',monospace;font-size:12px}
+.data-table tr:hover td{background:rgba(255,255,255,0.01)}
+.yes{color:var(--green)}
+.no{color:rgba(255,80,80,0.7)}
+.encrypted{color:var(--gold)}
+
+/* COMMITMENTS */
+.commitments{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.commitment{padding:22px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:flex;gap:14px;align-items:flex-start}
+.commit-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+.commit-body{}
+.commit-title{font-size:15px;font-weight:500;color:var(--t1);margin-bottom:6px}
+.commit-desc{font-size:13px;font-weight:300;color:var(--t2);line-height:1.65}
+
+/* LEGAL PROSE */
+.legal-block{background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;margin-top:20px}
+.legal-block p{font-size:14px;font-weight:300;color:var(--t3);line-height:1.9;margin-bottom:14px}
+.legal-block p:last-child{margin-bottom:0}
+.legal-block strong{color:var(--t2);font-weight:400}
+
+/* CONTACT SECTION */
+.contact-section{padding:64px 48px;max-width:900px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px}
+.contact-card-title{font-size:18px;font-weight:500;color:var(--t1);margin-bottom:8px}
+.contact-card-body{font-size:14px;font-weight:300;color:var(--t2);line-height:1.75;margin-bottom:16px}
+.contact-link{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:opacity 0.2s}
+.contact-link:hover{opacity:0.7}
+
+footer{padding:32px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.2)}
+.footer-brand{font-size:16px;font-weight:300}
+.footer-brand em{font-style:italic;font-weight:600;color:var(--gold)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-legal{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)}
+
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  .page-hero,.status-strip,.content-section,.contact-section{padding-left:24px;padding-right:24px}
+  .status-grid{grid-template-columns:1fr 1fr}
+  .commitments{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .principle{grid-template-columns:40px 1fr}
+  footer{padding:24px;flex-direction:column;gap:16px;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><em>MY</em>Stacy</a>
+  <div class="nav-links">
+    <a href="mystacy-features.html">Features</a>
+    <a href="mystacy-about.html">About</a>
+    <a href="mystacy-pricing.html">Pricing</a>
+    <a href="mystacy-privacy.html" class="active">Privacy</a>
+  </div>
+  <a href="index.html#waitlist" class="nav-cta">Request Access</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Privacy &amp; Security Architecture</div>
+  <div class="page-title">Your mind.<br><span class="gg">Your data.</span><br><span class="g">Always.</span></div>
+  <div class="page-lead">Mystacy handles thoughts, contacts, and communications — some of the most sensitive data a person can have. We treat it accordingly. Here's exactly how it works, technically and in plain English.</div>
+</div>
+
+<div class="status-strip">
+  <div class="status-grid">
+    <div class="status-cell">
+      <span class="status-icon">🔐</span>
+      <div class="status-label">Encryption</div>
+      <div class="status-val">AES-256-GCM</div>
+    </div>
+    <div class="status-cell">
+      <span class="status-icon">🏛️</span>
+      <div class="status-label">Storage</div>
+      <div class="status-val">Ciphertext only</div>
+    </div>
+    <div class="status-cell">
+      <span class="status-icon">🚫</span>
+      <div class="status-label">Data sold</div>
+      <div class="status-val" style="color:rgba(255,80,80,0.7)">Never</div>
+    </div>
+    <div class="status-cell">
+      <span class="status-icon">👁️</span>
+      <div class="status-label">We can read your data</div>
+      <div class="status-val" style="color:rgba(255,80,80,0.7)">No</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="content-section">
+  <div class="sec-label">How it works technically</div>
+  <div class="sec-title">The encryption <span class="gg">architecture.</span></div>
+  <div class="body-text">This is not marketing language. This is how the system actually works. If you're a technical person, this section will satisfy you. If you're not, the summary is: <em>we cannot read your data, even if we wanted to.</em></div>
+
+  <div class="arch-diagram">
+    <div class="arch-header">
+      <div class="arch-dot" style="background:#ff5f57"></div>
+      <div class="arch-dot" style="background:#febc2e"></div>
+      <div class="arch-dot" style="background:#28c840"></div>
+      <div class="arch-title">Encryption flow · Client → Server → AI</div>
+    </div>
+    <div class="arch-body">
+      <div class="arch-layer user">
+        <div class="arch-layer-icon">💻</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">Your Browser / Device</div>
+          <div class="arch-layer-desc">Data is encrypted here using AES-256-GCM before it leaves your device. Your encryption key never leaves the client.</div>
+        </div>
+        <div class="arch-layer-badge badge-green">Plaintext here only</div>
+      </div>
+      <div class="arch-arrow">↓ Encrypted payload travels over TLS ↓</div>
+      <div class="arch-layer server">
+        <div class="arch-layer-icon">🗄️</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">Supabase Database</div>
+          <div class="arch-layer-desc">Stores only ciphertext. No plaintext. Even database admins cannot read your notes, tasks, or contact data.</div>
+        </div>
+        <div class="arch-layer-badge badge-dim">Ciphertext only</div>
+      </div>
+      <div class="arch-arrow">↓ Fetched as ciphertext → decrypted in browser ↓</div>
+      <div class="arch-layer encrypt">
+        <div class="arch-layer-icon">🔓</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">Browser-side Decryption</div>
+          <div class="arch-layer-desc">Context is decrypted in your browser before being passed to the Claude API. The AI never sees raw ciphertext from the DB.</div>
+        </div>
+        <div class="arch-layer-badge badge-green">Decrypted locally</div>
+      </div>
+      <div class="arch-arrow">↓ Decrypted context sent to AI over TLS ↓</div>
+      <div class="arch-layer ai">
+        <div class="arch-layer-icon">🤖</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">Claude API (Anthropic)</div>
+          <div class="arch-layer-desc">Receives context for your session only. Anthropic's data handling applies. We do not send your data to other AI providers.</div>
+        </div>
+        <div class="arch-layer-badge badge-gold">Session-scoped only</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<div class="content-section">
+  <div class="sec-label">Privacy principles</div>
+  <div class="sec-title">Six things we <span class="g">will always do.</span></div>
+  <div class="principles">
+    <div class="principle">
+      <div class="p-num">01</div>
+      <div class="p-content">
+        <div class="p-title">Encrypt before it leaves your device</div>
+        <div class="p-body">Every piece of data you create in Mystacy is encrypted client-side using AES-256-GCM before it is transmitted. This is non-negotiable and will never change.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">02</div>
+      <div class="p-content">
+        <div class="p-title">Store only what's necessary</div>
+        <div class="p-body">We collect the minimum data required to run the service. Your email address, subscription status, and encrypted content. Nothing more.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">03</div>
+      <div class="p-content">
+        <div class="p-title">Never sell your data</div>
+        <div class="p-body">We will never sell, rent, or trade your data to any third party, advertiser, or data broker. Our business model is subscriptions — not your information.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">04</div>
+      <div class="p-content">
+        <div class="p-title">Tell you if anything changes</div>
+        <div class="p-body">If we ever change our data practices, we will notify you by email before the changes take effect — not after. You will always have the opportunity to delete your data and leave.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">05</div>
+      <div class="p-content">
+        <div class="p-title">Give you full data portability</div>
+        <div class="p-body">You can export all your data at any time in standard formats. If you leave Mystacy, your information leaves with you. Nothing is held hostage.</div>
+      </div>
+    </div>
+    <div class="principle">
+      <div class="p-num">06</div>
+      <div class="p-content">
+        <div class="p-title">Delete completely on request</div>
+        <div class="p-body">If you request account deletion, all your data — including encrypted content — is permanently deleted within 30 days. No backups retained beyond that window.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE COLLECT -->
+<div class="content-section">
+  <div class="sec-label">Data collection</div>
+  <div class="sec-title">Exactly what we <span class="g">collect and why.</span></div>
+  <div class="body-text">No ambiguity. Here is every category of data Mystacy handles, what we do with it, and whether it is encrypted.</div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Data Type</th>
+        <th>Purpose</th>
+        <th>Encrypted</th>
+        <th>Shared</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Email address</td><td>Account identification, communication</td><td class="no">No (needed for auth)</td><td class="no">Never sold</td></tr>
+      <tr><td>Notes &amp; captures</td><td>Your second brain content</td><td class="encrypted">AES-256-GCM</td><td class="no">Never</td></tr>
+      <tr><td>Tasks &amp; projects</td><td>Productivity layer</td><td class="encrypted">AES-256-GCM</td><td class="no">Never</td></tr>
+      <tr><td>Contact intelligence</td><td>Relationship layer</td><td class="encrypted">AES-256-GCM</td><td class="no">Never</td></tr>
+      <tr><td>SMS content</td><td>Stacy agent interactions</td><td class="encrypted">AES-256-GCM</td><td class="no">Never</td></tr>
+      <tr><td>Gmail content</td><td>Contact intelligence (if enabled)</td><td class="encrypted">AES-256-GCM</td><td class="no">Never</td></tr>
+      <tr><td>Subscription &amp; billing</td><td>Payment processing via Stripe</td><td class="no">Stripe-managed</td><td class="no">Stripe only</td></tr>
+      <tr><td>Usage analytics</td><td>Product improvement (anonymized)</td><td class="no">Anonymized</td><td class="no">Never identified</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- COMMITMENTS -->
+<div class="content-section">
+  <div class="sec-label">Our commitments</div>
+  <div class="sec-title">What we <span class="gg">will never do.</span></div>
+  <div class="commitments">
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never serve ads</div>
+        <div class="commit-desc">There are no ads in Mystacy. There never will be. Advertising models require treating users as inventory. We treat you as a customer.</div>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never sell data</div>
+        <div class="commit-desc">Your data has no value to us except as something to protect on your behalf. It will never be sold, licensed, or traded to any third party.</div>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never train AI on your data</div>
+        <div class="commit-desc">Your captures, notes, and contact intelligence are never used to train AI models — ours or anyone else's. Your thoughts are yours.</div>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never share without consent</div>
+        <div class="commit-desc">We do not share your data with any third party without your explicit consent, except where legally required (and we'll tell you if that happens).</div>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never obscure our practices</div>
+        <div class="commit-desc">This page is written in plain English. If our practices ever change, you'll hear about it before it happens — not buried in a terms update.</div>
+      </div>
+    </div>
+    <div class="commitment">
+      <div class="commit-icon">🚫</div>
+      <div class="commit-body">
+        <div class="commit-title">Never hold your data hostage</div>
+        <div class="commit-desc">Full export available at any time. Deletion is permanent and complete. You are never locked in.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL PROSE -->
+<div class="content-section">
+  <div class="sec-label">Legal</div>
+  <div class="sec-title">The policy in <span class="g">plain English.</span></div>
+  <div class="body-text">We've written an actual plain-English summary. The full legal document is below that. Read whichever suits you.</div>
+  <div class="legal-block">
+    <p><strong>What we collect:</strong> Your email address for account creation. Your subscription status for billing. All other content you create (notes, tasks, contact data, SMS interactions) is stored encrypted — we cannot read it.</p>
+    <p><strong>How we use it:</strong> To provide the Mystacy service. Your encrypted content is decrypted in your browser to power Stacy's intelligence. Your email is used only for account-related communications and never for marketing without consent.</p>
+    <p><strong>Who we share it with:</strong> Stripe (payment processing), Supabase (encrypted storage), Twilio (SMS delivery), Anthropic (AI processing — session-scoped, not stored). No one else. Nothing sold.</p>
+    <p><strong>How long we keep it:</strong> For as long as you have an active account. On deletion request, all data is permanently removed within 30 days. Billing records retained as required by law (typically 7 years).</p>
+    <p><strong>Your rights:</strong> You have the right to access, export, correct, and delete all your data at any time. Contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4030322936212339002d3933342123396e2129">[email&#160;protected]</a> to exercise any of these rights. We will respond within 5 business days.</p>
+    <p><strong>Changes to this policy:</strong> We will notify you by email at least 14 days before any material change to this policy takes effect. You may delete your account and data at any time if you disagree with any change.</p>
+    <p><strong>Jurisdiction:</strong> Mystacy is operated from Florida, United States. This policy is governed by Florida law and applicable federal regulations. For GDPR inquiries (EU residents), contact <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1b1b3a8b7a0a2b881acb8b2b5a0a2b8efa0a8">[email&#160;protected]</a>.</p>
+    <p><strong>Effective date:</strong> March 2026. Last updated: March 14, 2026.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="sec-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:12px">
+    <span>Contact us</span><span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+  <div style="font-size:clamp(24px,3.5vw,36px);font-weight:300;color:var(--t1);margin-bottom:32px">Questions about your data? <span style="color:var(--gold)">We respond personally.</span></div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-card-title">Privacy questions</div>
+      <div class="contact-card-body">Questions about how we handle your data, requests to export or delete your account, or GDPR/CCPA inquiries.</div>
+      <a href="/cdn-cgi/l/email-protection#0b7b79627d6a68724b6672787f6a6872256a62" class="contact-link"><span class="__cf_email__" data-cfemail="83f3f1eaf5e2e0fac3eefaf0f7e2e0faade2ea">[email&#160;protected]</span> →</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-title">Security disclosures</div>
+      <div class="contact-card-body">Found a security vulnerability? We take responsible disclosure seriously and will respond within 24 hours.</div>
+      <a href="/cdn-cgi/l/email-protection#afdccaccdaddc6dbd6efc2d6dcdbceccd681cec6" class="contact-link"><span class="__cf_email__" data-cfemail="1b687e786e69726f625b7662686f

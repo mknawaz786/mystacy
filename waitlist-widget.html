@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYStacy — Join the Waitlist</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1714;
+  --surface:rgba(255,255,255,0.05);
+  --border:rgba(201,168,76,0.18);
+  --border2:rgba(201,168,76,0.35);
+  --gold:#c9a84c;
+  --gold-faint:rgba(201,168,76,0.09);
+  --t1:rgba(255,255,255,0.92);
+  --t2:rgba(255,255,255,0.52);
+  --t3:rgba(255,255,255,0.26);
+  --green:#4ade80;
+  --red:rgba(255,90,90,0.9);
+}
+html,body{
+  width:100%;min-height:100%;
+  background:#1a1714;
+  font-family:'Figtree',-apple-system,sans-serif;
+}
+body{
+  display:flex;align-items:flex-start;
+  justify-content:center;
+  padding:16px;
+}
+
+/* ── CARD ── */
+.card{
+  width:100%;max-width:460px;
+  background:#1a1714;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+.card-top-line{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0.45;
+}
+.card-glow{
+  position:absolute;top:-80px;right:-80px;
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* ── HEADER ── */
+.card-header{
+  padding:26px 28px 18px;
+  text-align:center;position:relative;
+}
+.logo{
+  font-size:26px;font-weight:300;
+  color:var(--t1);letter-spacing:-0.02em;margin-bottom:7px;
+}
+.logo em{font-style:italic;font-weight:600;color:var(--gold)}
+.tagline{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);
+}
+
+.card-divider{height:1px;background:var(--border);margin:0 28px}
+
+/* ── FORM ── */
+.card-body{padding:22px 28px 26px}
+
+.form-title{
+  font-size:19px;font-weight:300;color:var(--t1);
+  margin-bottom:5px;line-height:1.25;
+}
+.form-title em{font-style:italic;font-weight:600;color:var(--gold)}
+.form-sub{
+  font-size:13px;font-weight:300;color:var(--t2);
+  margin-bottom:20px;line-height:1.6;
+}
+
+.field{margin-bottom:10px}
+.field-label{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:6px;
+}
+.field-input{
+  width:100%;padding:11px 14px;
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:10px;
+  color:var(--t1);
+  font-family:'Figtree',sans-serif;font-size:14px;font-weight:300;
+  outline:none;transition:border-color 0.2s;
+  -webkit-appearance:none;appearance:none;
+}
+.field-input::placeholder{color:var(--t3)}
+.field-input:focus{border-color:var(--border2)}
+.field-input.error-field{border-color:var(--red)}
+
+.field-error{
+  display:none;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--red);
+  margin-top:5px;letter-spacing:0.04em;
+}
+.field-error.show{display:block}
+
+/* ── TIER PILLS ── */
+.tier-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:8px;display:block;
+}
+.tier-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:6px;margin-bottom:18px;
+}
+.tier-pill{
+  padding:10px 4px;border-radius:9px;
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--t2);
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.06em;cursor:pointer;
+  transition:all 0.15s;text-align:center;
+  line-height:1;
+}
+.tier-pill:hover{border-color:var(--border);color:var(--t1)}
+.tier-pill.active{
+  background:var(--gold-faint);
+  border-color:var(--border2);color:var(--gold);
+}
+.tier-name{display:block;margin-bottom:4px;font-size:10px}
+.tier-price{
+  display:block;font-family:'Figtree',sans-serif;
+  font-size:13px;font-weight:500;color:inherit;
+}
+
+/* ── SUBMIT ── */
+.submit-btn{
+  width:100%;padding:13px;border-radius:10px;
+  background:var(--gold);border:none;
+  color:#1a1714;font-family:'Figtree',sans-serif;
+  font-size:15px;font-weight:600;cursor:pointer;
+  transition:all 0.18s;letter-spacing:0.01em;
+}
+.submit-btn:hover{background:#d4b459;transform:translateY(-1px)}
+.submit-btn:active{transform:translateY(0)}
+.submit-btn:disabled{opacity:0.6;cursor:default;transform:none}
+
+.form-note{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;color:var(--t3);letter-spacing:0.05em;
+  text-align:center;margin-top:11px;line-height:1.6;
+}
+
+.inline-msg{
+  display:none;padding:10px 14px;border-radius:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;margin-bottom:10px;letter-spacing:0.04em;text-align:center;
+}
+.inline-msg.show{display:block}
+.inline-msg.gold{
+  background:var(--gold-faint);border:1px solid var(--border2);color:var(--gold);
+}
+.inline-msg.red{
+  background:rgba(255,90,90,0.07);border:1px solid rgba(255,90,90,0.2);color:var(--red);
+}
+
+/* ── SUCCESS ── */
+.success-view{
+  display:none;padding:28px 28px 32px;
+  text-align:center;
+}
+.success-view.show{display:block;animation:fadeUp 0.4s ease}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.success-icon{
+  width:54px;height:54px;border-radius:50%;
+  background:var(--gold-faint);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;font-size:20px;color:var(--gold);
+}
+.success-title{
+  font-size:20px;font-weight:300;color:var(--t1);
+  margin-bottom:7px;line-height:1.25;
+}
+.success-title em{font-style:italic;font-weight:600;color:var(--gold)}
+.success-body{
+  font-size:13px;font-weight:300;color:var(--t2);
+  margin-bottom:20px;line-height:1.75;max-width:340px;margin-left:auto;margin-right:auto;
+}
+
+.queue-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 14px;border-radius:20px;
+  background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.2);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--green);margin-bottom:18px;
+}
+.queue-pulse{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.ref-block{
+  background:rgba(0,0,0,0.25);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:10px;
+}
+.ref-url{
+  flex:1;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--gold);
+  text-align:left;word-break:break-all;line-height:1.4;
+}
+.copy-btn{
+  padding:7px 11px;background:var(--gold-faint);
+  border:1px solid var(--border2);border-radius:7px;
+  color:var(--gold);font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;cursor:pointer;
+  white-space:nowrap;transition:all 0.15s;flex-shrink:0;
+}
+.copy-btn:hover{background:rgba(201,168,76,0.15)}
+
+.ref-note{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--t3);line-height:1.5;
+}
+
+/* ── FOOTER STRIP ── */
+.card-footer{
+  padding:11px 20px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;background:rgba(0,0,0,0.18);
+}
+.footer-item{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  color:var(--t3);letter-spacing:0.1em;
+  display:flex;align-items:center;gap:5px;
+}
+.footer-dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--gold);opacity:0.5;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-top-line"></div>
+  <div class="card-glow"></div>
+
+  <!-- HEADER -->
+  <div class="card-header">
+    <div class="logo"><em>MY</em>Stacy</div>
+    <div class="tagline">Personal AI &middot; Second Brain &middot; Not for everyone</div>
+  </div>
+
+  <div class="card-divider"></div>
+
+  <!-- FORM VIEW -->
+  <div class="card-body" id="form-view">
+    <div class="form-title">Join the <em>waitlist.</em></div>
+    <div class="form-sub">We review every application personally. Invite-only &mdash; no card required.</div>
+
+    <div id="inline-msg" class="inline-msg"></div>
+
+    <div class="field">
+      <label class="field-label" for="w-email">Email address *</label>
+      <input class="field-input" type="email" id="w-email" placeholder="your@email.com" autocomplete="email">
+      <div class="field-error" id="email-error">Please enter a valid email address.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="w-name">Your name</label>
+      <input class="field-input" type="text" id="w-name" placeholder="Dr. Smith / Jane Chen" autocomplete="name">
+    </div>
+
+    <div style="margin-bottom:18px">
+      <span class="tier-label">Select your tier</span>
+      <div class="tier-row">
+        <div class="tier-pill" id="tier-essential" onclick="selectTier('essential')">
+          <span class="tier-name">Essential</span>
+          <span class="tier-price">$99/mo</span>
+        </div>
+        <div class="tier-pill active" id="tier-professional" onclick="selectTier('professional')">
+          <span class="tier-name">Professional</span>
+          <span class="tier-price">$199/mo</span>
+        </div>
+        <div class="tier-pill" id="tier-sovereign" onclick="selectTier('sovereign')">
+          <span class="tier-name">Sovereign</span>
+          <span class="tier-price">$299/mo</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitWidget()">Request Access</button>
+    <div class="form-note">Invite-only &middot; No card required &middot; We respond personally</div>
+  </div>
+
+  <!-- SUCCESS VIEW -->
+  <div class="success-view" id="success-view">
+    <div class="success-icon">&#10022;</div>
+    <div class="success-title">You are <em>on the list.</em></div>
+    <div class="queue-badge">
+      <div class="queue-pulse"></div>
+      You are #<span id="w-queue">--</span> on the list
+    </div>
+    <div class="success-body">We received your request and will reach out personally when your spot opens. Share your invite link to move up.</div>
+    <div class="ref-block">
+      <div class="ref-url" id="w-ref-url">mystacy.ai/?ref=...</div>
+      <button class="copy-btn" id="copy-btn" onclick="copyRef()">Copy</button>
+    </div>
+    <div class="ref-note">Each referral moves you up 5 spots</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-item"><div class="footer-dot"></div>AES-256 encrypted</div>
+    <div class="footer-item"><div class="footer-dot"></div>No data sold</div>
+    <div class="footer-item"><div class="footer-dot"></div>Invite only</div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG — replace with your values ──
+var SUPABASE_URL = 'YOUR_SUPABASE_URL';
+var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+// ── State ──
+var selectedTier = 'professional';
+var refCode = '';
+
+// ── Tier selection ──
+function selectTier(tier) {
+  selectedTier = tier;
+  document.querySelectorAll('.tier-pill').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.getElementById('tier-' + tier).classList.add('active');
+}
+
+// ── Generate referral code ──
+function genCode() {
+  return Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+// ── Get ref param from parent URL ──
+function getReferredBy() {
+  try {
+    var ref = new URLSearchParams(window.location.search).get('ref');
+    if (ref) return ref;
+    // Also try reading from parent page URL via postMessage or referrer
+    var referrer = document.referrer;
+    if (referrer) {
+      var url = new URL(referrer);
+      return url.searchParams.get('ref') || null;
+    }
+  } catch(e) {}
+  return null;
+}
+
+// ── Show inline message ──
+function showMsg(text, type) {
+  var el = document.getElementById('inline-msg');
+  el.textContent = text;
+  el.className = 'inline-msg show ' + type;
+}
+function hideMsg() {
+  var el = document.getElementById('inline-msg');
+  el.className = 'inline-msg';
+}
+
+// ── Submit ──
+async function submitWidget() {
+  var emailEl = document.getElementById('w-email');
+  var nameEl = document.getElementById('w-name');
+  var btn = document.getElementById('submit-btn');
+  var emailErr = document.getElementById('email-error');
+
+  var email = emailEl.value.trim();
+  var name = nameEl.value.trim();
+
+  // Reset errors
+  emailEl.classList.remove('error-field');
+  emailErr.classList.remove('show');
+  hideMsg();
+
+  // Validate
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    emailEl.classList.add('error-field');
+    emailErr.classList.add('show');
+    emailEl.focus();
+    return;
+  }
+
+  // Loading state
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  refCode = genCode();
+  var referredBy = getReferredBy();
+
+  try {
+    var response = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        email: email,
+        name: name || null,
+        tier: selectedTier,
+        referral_code: refCode,
+        referred_by: referredBy || null
+      })
+    });
+
+    if (response.ok) {
+      var data = await response.json();
+      var queuePos = (data && data[0] && data[0].queue_position) 
+        ? data[0].queue_position 
+        : Math.floor(Math.random() * 200) + 100;
+      showSuccess(queuePos, refCode);
+    } else {
+      var err = await response.json();
+      btn.textContent = 'Request Access';
+      btn.disabled = false;
+
+      if (err && err.code === '23505') {
+        showMsg('This email is already on the list. We will be in touch soon.', 'gold');
+      } else if (err && err.code === '23514') {
+        emailEl.classList.add('error-field');
+        emailErr.classList.add('show');
+      } else {
+        showMsg('Something went wrong. Please try again.', 'red');
+      }
+    }
+  } catch(e) {
+    btn.textContent = 'Request Access';
+    btn.disabled = false;
+    showMsg('Connection error. Please try again.', 'red');
+  }
+}
+
+// ── Show success state ──
+function showSuccess(queuePos, code) {
+  document.getElementById('form-view').style.display = 'none';
+  document.getElementById('w-queue').textContent = queuePos;
+  document.getElementById('w-ref-url').textContent = 'mystacy.ai/?ref=' + code.toLowerCase();
+  document.getElementById('success-view').classList.add('show');
+}
+
+// ── Copy referral link ──
+function copyRef() {
+  var url = 'https://www.mystacy.ai/?ref=' + refCode.toLowerCase();
+  navigator.clipboard.writeText(url).then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    btn.style.color = '#4ade80';
+    btn.style.borderColor = 'rgba(74,222,128,0.3)';
+    setTimeout(function() {
+      btn.textContent = 'Copy';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+  }).catch(function() {
+    // Fallback for older browsers
+    var el = document.getElementById('w-ref-url');
+    var range = document.createRange();
+    range.selectNode(el);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    document.getElementById('copy-btn').textContent = 'Copied!';
+    setTimeout(function() {
+      document.getElementById('copy-btn').textContent = 'Copy';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
