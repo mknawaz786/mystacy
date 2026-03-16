@@ -52,22 +52,6 @@ body{
   pointer-events:none;
 }
 
-/* ── HEADER ── */
-.card-header{
-  padding:26px 28px 18px;
-  text-align:center;position:relative;
-}
-.logo{
-  font-size:26px;font-weight:300;
-  color:var(--t1);letter-spacing:-0.02em;margin-bottom:7px;
-}
-.logo em{font-style:italic;font-weight:600;color:var(--gold)}
-.tagline{
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);
-}
-
-.card-divider{height:1px;background:var(--border);margin:0 28px}
 
 /* ── FORM ── */
 .card-body{padding:22px 28px 26px}
@@ -262,7 +246,6 @@ body{
 <body>
 
 <div class="card">
-  <div class="card-top-line"></div>
   <div class="card-glow"></div>
 
   <!-- FORM VIEW -->
@@ -327,6 +310,7 @@ body{
     <div class="footer-item"><div class="footer-dot"></div>No data sold</div>
     <div class="footer-item"><div class="footer-dot"></div>Invite only</div>
   </div>
+  <div class="card-top-line"></div>
 </div>
 
 <script>
